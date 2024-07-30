@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 ARG IMAGE_NAME=myproject
 ENV IMAGE_NAME=$IMAGE_NAME
 
@@ -23,21 +23,19 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     libyaml-dev \
     tzdata \
     ca-certificates \
+    gcc \
+    ruby-dev \
+    libxslt-dev \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install jemalloc to fix Ruby memory fragmentation
-RUN apt-get update -qq &&\
-  apt-get install -y -qq \
-  libjemalloc-dev
-
 # Set Ruby version
-ENV RUBY_VERSION 3.2.2
+ENV RUBY_VERSION 3.3.4
 
 # Install ruby
 RUN echo 'gem: --no-document' >> /usr/local/etc/gemrc &&\
   mkdir /src && cd /src && git clone https://github.com/rbenv/ruby-build.git &&\
   cd /src/ruby-build && ./install.sh &&\
-  cd / && rm -rf /src/ruby-build && CONFIGURE_OPTS='--with-jemalloc' ruby-build $RUBY_VERSION /usr/local
+  cd / && rm -rf /src/ruby-build && ruby-build $RUBY_VERSION /usr/local
 
 # Store Bundler settings in the project's root
 ENV BUNDLE_APP_CONFIG=.bundle
@@ -54,6 +52,7 @@ ENV BUNDLER_VERSION='2.4.7' \
 RUN gem update --system
 RUN gem install bundler --no-document -v $BUNDLER_VERSION
 
+
 # App Development
 ENV APP_HOME /usr/src/app
 RUN mkdir $APP_HOME
@@ -67,6 +66,8 @@ ENV BUNDLER_VERSION='2.4.7' \
 
 ENV RAILS_ENV=development
 COPY Gemfile* $APP_HOME
+
+RUN bundle config set force_ruby_platform true
 
 RUN bundle config set --local without 'production' && \
     bundle config --local development true
