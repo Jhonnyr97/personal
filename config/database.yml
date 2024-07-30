@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: <%= ENV.fetch("POSTGRES_USER") { 'SAMPLE' } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { 'SAMPLE_PW' } %>
+  host: <%= ENV.fetch("POSTGRES_URL") { 'db' } %>
+
+development:
+  <<: *default
+  database: <%= File.basename(Rails.root) %>_development
+
+test:
+  <<: *default
+  database: <%= File.basename(Rails.root) %>_test
+
+production:
+  <<: *default
+  database: <%= File.basename(Rails.root) %>_production
