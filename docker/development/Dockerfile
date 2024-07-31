@@ -67,8 +67,6 @@ ENV BUNDLER_VERSION='2.4.7' \
 ENV RAILS_ENV=development
 COPY Gemfile* $APP_HOME
 
-RUN bundle config set force_ruby_platform true
-
 RUN bundle config set --local without 'production' && \
     bundle config --local development true
 

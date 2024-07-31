@@ -77,6 +77,18 @@ services:
       main:
         aliases:
           - redis
+  tailwindcss:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: "./docker/development/Dockerfile"
+    command: bin/rails tailwindcss:watch
+    init: true
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app:delegated
   adminer:
     image: adminer
     restart: always

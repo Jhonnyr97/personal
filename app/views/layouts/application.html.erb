@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <%= yield %>
+  <header class="flex justify-between items-center p-6 shadow-md bg-white">
+    <a href="#" class="text-xl font-bold">Ruby Dev</a>
+    <button class="bg-black text-white px-4 py-2">Contact me</button>
+
+  </header>
+    <main class="bg-slate-100">
+      <%= yield %>
+    </main>
+  <footer class="text-center p-5 bg-gray-800 text-white">
+      <p>© <%= DateTime.now.year %> Nilthon Jhon Rojas Apumayta. Tutti i diritti riservati.</p>
+  </footer>
   </body>
+
 </html>

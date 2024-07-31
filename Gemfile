@@ -75,3 +75,7 @@ group :test do
 end
 
 gem 'sidekiq'
+
+gem "tailwindcss-rails", "~> 2.6"
+
+gem 'sassc-rails'
