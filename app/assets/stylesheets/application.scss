@@ -19,3 +19,16 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+@font-face {
+  font-family: 'SourceCodePro';
+  src: asset-url('/static/SourceCodePro-Regular.ttf') format('truetype'),
+  asset-url('/static/SourceCodePro-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+  font-family: "Source Code Pro", monospace;
+}

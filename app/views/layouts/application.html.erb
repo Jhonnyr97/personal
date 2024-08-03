@@ -9,20 +9,19 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  </head>
+    </head>
 
   <body>
-  <header class="flex justify-between items-center p-6 shadow-md bg-white bg-opacity-65">
-    <a href="#" class="text-xl font-bold">Ruby Dev</a>
-    <button class="bg-black text-white px-4 py-2">Contact me</button>
+  <header class="flex justify-between items-center p-4 shadow-md bg-white bg-opacity-65">
+    <a href="#" class="text-xl font-bold px-4">Ruby Dev</a>
+    <a href="mailto:jhon.apu97@gmail.com" class="bg-black text-white px-5 py-2">Let's go</a>
 
   </header>
-    <main class="bg-slate-100">
+    <main class="">
       <%= yield %>
     </main>
-  <footer class="text-center p-5 bg-gray-800 text-white">
-      <p>© <%= DateTime.now.year %> Nilthon Jhon Rojas Apumayta. Tutti i diritti riservati.</p>
+  <footer class="text-center p-5 bg-black text-white">
+      <p>© <%= DateTime.now.year %> Nilthon Jhon Rojas Apumayta. All rights reserved.</p>
   </footer>
   </body>
 
