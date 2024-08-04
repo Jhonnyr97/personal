@@ -58,17 +58,19 @@ ENV APP_HOME=/usr/src/app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
+# Copy application code
+COPY . $APP_HOME
+
 # Configure bundler
 ENV BUNDLER_VERSION='2.4.7' \
-  BUNDLE_JOBS=4 \
+  BUNDLE_JOBS=8 \
   BUNDLE_RETRY=3 \
   MAKE="make --jobs 8"
 
-ENV RAILS_ENV=development
-COPY Gemfile* $APP_HOME
+ENV RAILS_ENV=production
 
-RUN bundle config set --local without 'production' && \
-    bundle config --local development true
+RUN bundle config set --local without 'development' && \
+    bundle config --local production true
 RUN bundle lock --add-platform x86_64-linux
 
 # Upgrade RubyGems and install specific Bundler version
@@ -76,11 +78,9 @@ RUN gem update --system
 RUN gem install bundler --no-document -v $BUNDLER_VERSION
 
 
-# Generate ssl keys
-RUN touch ~/.rnd
-RUN openssl req -x509 -sha256 -nodes -newkey rsa:4096 -days 365 -keyout /tmp/localhost.key -out /tmp/localhost.crt -subj '/CN=localhost'
-
 RUN bundle install
 RUN mkdir -p tmp/pids
+
+RUN SECRET_KEY_BASE=1 rails assets:precompile
 
 ENTRYPOINT ["docker/entrypoint.sh"]

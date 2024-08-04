@@ -38,6 +38,7 @@ services:
     depends_on:
       - db
       - tailwindcss
+      - redis
     networks:
       main:
         aliases:

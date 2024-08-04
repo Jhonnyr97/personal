@@ -13,12 +13,6 @@
  *= require_tree .
  *= require_self
  */
-.bg-cover {
-  background-image: asset-url('io.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
 @font-face {
   font-family: 'SourceCodePro';
