@@ -76,5 +76,5 @@ end
 
 gem 'sidekiq'
 
-gem "tailwindcss-rails", "~> 2.6"
+gem "tailwindcss-rails", "~> 2.7"
 gem 'actionpack-page_caching'
